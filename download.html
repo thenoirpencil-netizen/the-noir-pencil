@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Guide Is On Its Way | The Noir Pencil</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="logo-transparent.png" alt="The Noir Pencil" style="height:44px; width:auto;"></a>
+    <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="blog.html">Journal</a></li>
+      <li><a href="inquire.html" class="nav-cta">Inquire</a></li>
+    </ul>
+  </nav>
+
+  <div class="not-found" style="text-align:center;">
+    <div class="gold-rule center"></div>
+    <h2 style="font-family:var(--serif); font-size:clamp(36px,5vw,64px); font-weight:300; color:var(--cream); margin-bottom:1rem;">Your guide is on its way.</h2>
+    <p style="font-family:var(--serif); font-size:20px; font-style:italic; color:var(--mist); max-width:520px; margin:0 auto 2rem; line-height:1.7;">Check your inbox for <em>Which Edit Do You Need?</em> It should be there shortly.</p>
+    <p style="font-family:var(--sans); font-size:14px; font-weight:300; color:var(--mist); max-width:480px; margin:0 auto 2.5rem; line-height:1.8;">If you do not see it in the next few minutes, check your spam folder and mark us as a trusted sender so you do not miss anything going forward.</p>
+
+    <div style="border:1px solid #1e1e1e; padding:2.5rem; max-width:480px; margin:0 auto 2.5rem;">
+      <div class="section-label" style="text-align:center; margin-bottom:1rem;">While You Are Here</div>
+      <p style="font-family:var(--serif); font-size:18px; font-weight:300; color:var(--cream); line-height:1.5; margin-bottom:0.75rem;">Want to go deeper?</p>
+      <p style="font-family:var(--sans); font-size:13px; font-weight:300; color:var(--mist); line-height:1.8; margin-bottom:1.5rem;">The Writer's Self-Edit Checklist covers nine sections of the editing process in detail. A practical tool for any document, any writer, any time.</p>
+      <a href="https://noirpencil.gumroad.com/l/oplxru" target="_blank" rel="noopener" class="btn btn-gold">Get the Checklist &rarr; $12</a>
+    </div>
+
+    <p style="font-size:13px; color:var(--mist);">When you are ready for a second set of eyes, we are here.</p>
+    <a href="inquire.html" class="btn" style="margin-top:1rem; display:inline-block;">Start Your Inquiry</a>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo-transparent.png" alt="The Noir Pencil" style="height:32px; width:auto; margin-bottom:0.75rem;">
+        <span>Founded by a Black woman. Built for every writer.</span>
+        <span style="margin-top:0.5rem;">Chicago, Illinois</span>
+      </div>
+      <div class="footer-nav">
+        <h4>Navigate</h4>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog.html">Journal</a>
+        <a href="inquire.html">Inquire</a>
+      </div>
+      <div class="footer-social">
+        <h4>Follow Along</h4>
+        <a href="https://instagram.com/thenoirpencil" target="_blank" rel="noopener">@thenoirpencil</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 The Noir Pencil. All rights reserved.</p>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+  </script>
+</body>
+</html>

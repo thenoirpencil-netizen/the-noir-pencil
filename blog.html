@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Editor's Corner | The Noir Pencil</title>
+  <meta name="description" content="Practical writing advice from the editor behind The Noir Pencil. Honest guidance for writers who want their work to be better.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-inner">
+      <span>Professional Editing</span><span>&middot;</span><span>Black-Owned</span><span>&middot;</span><span>Est. 2016</span><span>&middot;</span><span>Founded for Every Writer</span><span>&middot;</span>
+      <span>Professional Editing</span><span>&middot;</span><span>Black-Owned</span><span>&middot;</span><span>Est. 2016</span><span>&middot;</span><span>Founded for Every Writer</span><span>&middot;</span>
+    </div>
+  </div>
+
+  <nav>
+    <a href="index.html" class="nav-logo"><img src="logo-transparent.png" alt="The Noir Pencil" style="height:38px; width:auto;"></a>
+    <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="blog.html" class="active">Journal</a></li>
+      <li><a href="inquire.html" class="nav-cta">Inquire</a></li>
+    </ul>
+  </nav>
+
+  <div class="blog-header-photo"><div class="blog-header-photo-bg"></div><div class="blog-header-photo-content">
+    <div class="gold-rule"></div>
+    <h1>The Editor's Corner</h1>
+    <p>Practical writing advice from the editor behind The Noir Pencil. No fluff. No generic tips. Just honest guidance for writers who want their work to be better.</p>
+  </div>
+  </div>
+
+  <div class="blog-grid">
+    <div class="blog-card">
+      <div class="blog-card-label">Editing Basics</div>
+      <h2>The difference between proofreading and editing (and why it matters for your writing)</h2>
+      <p>Most writers use the words interchangeably. Understanding the difference can save you from paying for a service that does not actually solve your problem.</p>
+      <a href="post-1.html" class="read-more">Read More</a>
+    </div>
+    <div class="blog-card">
+      <div class="blog-card-label">Writing Habits</div>
+      <h2>Five things writers do that make their writing harder to read</h2>
+      <p>These are not mistakes, exactly. They are habits. And most writers do not notice them until someone points them out.</p>
+      <a href="post-2.html" class="read-more">Read More</a>
+    </div>
+  </div>
+
+  <section class="final-cta">
+    <div class="gold-rule center"></div>
+    <h2>Ready when you are.</h2>
+    <p>Send your document and let us get to work.</p>
+    <a href="inquire.html" class="btn btn-gold">Start Your Inquiry</a>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo-transparent.png" alt="The Noir Pencil" style="height:32px; width:auto; margin-bottom:0.75rem;">
+        <span>Founded by a Black woman. Built for every writer.</span>
+        <span style="margin-top:0.5rem;">Chicago, Illinois</span>
+      </div>
+      <div class="footer-nav">
+        <h4>Navigate</h4>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="blog.html">Journal</a>
+        <a href="inquire.html">Inquire</a>
+      </div>
+      <div class="footer-social">
+        <h4>Follow Along</h4>
+        <a href="https://instagram.com/thenoirpencil" target="_blank" rel="noopener">@thenoirpencil</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 The Noir Pencil. All rights reserved.</p>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- POPUP -->
+  <div class="popup-overlay" id="popupOverlay" role="dialog" aria-modal="true" aria-label="Free guide offer">
+    <div class="popup-box">
+      <button class="popup-close" id="popupClose" aria-label="Close">&times;</button>
+      <div class="popup-gold-rule"></div>
+      <h3>Not sure which edit you need?</h3>
+      <p>Enter your email and we will send you a free guide that walks you through proofreading, line editing, and developmental editing so you can find the right fit for your document.</p>
+      <div id="popupFormWrap">
+        <form class="popup-form" id="popupForm">
+          <div style="position:absolute;left:-5000px;" aria-hidden="true">
+            <input type="text" name="b_520047ae7351818956513aa3b_a6891338d7" tabindex="-1" value="">
+          </div>
+          <input type="email" name="EMAIL" id="popupEmail" placeholder="Your email address" required autocomplete="email">
+          <button type="submit" class="btn btn-gold">Send Me the Free Guide</button>
+          <p class="popup-fine">No spam. Just useful resources for writers.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+
+    // ── Popup ──
+    const overlay  = document.getElementById('popupOverlay');
+    const closeBtn = document.getElementById('popupClose');
+    const popupForm = document.getElementById('popupForm');
+    const popupWrap = document.getElementById('popupFormWrap');
+
+    function showPopup() {
+      if (sessionStorage.getItem('tnp_popup_shown')) return;
+      overlay.classList.add('visible');
+      sessionStorage.setItem('tnp_popup_shown', '1');
+    }
+
+    function hidePopup() { overlay.classList.remove('visible'); }
+
+    setTimeout(showPopup, 60000);
+    closeBtn.addEventListener('click', hidePopup);
+    overlay.addEventListener('click', e => { if (e.target === overlay) hidePopup(); });
+
+    popupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('popupEmail').value;
+      const url   = 'https://thenoirpecil.us20.list-manage.com/subscribe/post-json?u=520047ae7351818956513aa3b&id=a6891338d7&EMAIL='
+                  + encodeURIComponent(email) + '&c=tnpPopupCb';
+
+      window.tnpPopupCb = function(data) {
+        if (data.result === 'success' || data.msg.indexOf('already subscribed') > -1) {
+          popupWrap.innerHTML = '<p class=\'popup-success\'>Got it. Check your inbox shortly. Really glad you found us.</p>';
+        } else {
+          popupWrap.innerHTML = '<p class=\'popup-success\' style=\'color:#c0392b;\'>Something went wrong. Please try again or email us directly.</p>';
+        }
+        const s = document.getElementById('mc-popup-script');
+        if (s) s.remove();
+      };
+
+      const script  = document.createElement('script');
+      script.id     = 'mc-popup-script';
+      script.src    = url;
+      document.body.appendChild(script);
+    });
+
+  </script>
+</body>
+</html>
