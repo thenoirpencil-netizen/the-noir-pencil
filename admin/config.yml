@@ -10,7 +10,8 @@ collections:
     label: "Journal Posts"
     folder: "posts"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "posts/{{slug}}.html"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category Label", name: "category", widget: "string", hint: "e.g. Editing Basics, Writing Habits" }
