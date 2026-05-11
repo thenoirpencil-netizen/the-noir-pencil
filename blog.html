@@ -35,19 +35,8 @@
   </div>
   </div>
 
-  <div class="blog-grid">
-    <div class="blog-card">
-      <div class="blog-card-label">Editing Basics</div>
-      <h2>The difference between proofreading and editing (and why it matters for your writing)</h2>
-      <p>Most writers use the words interchangeably. Understanding the difference can save you from paying for a service that does not actually solve your problem.</p>
-      <a href="post-1.html" class="read-more">Read More</a>
-    </div>
-    <div class="blog-card">
-      <div class="blog-card-label">Writing Habits</div>
-      <h2>Five things writers do that make their writing harder to read</h2>
-      <p>These are not mistakes, exactly. They are habits. And most writers do not notice them until someone points them out.</p>
-      <a href="post-2.html" class="read-more">Read More</a>
-    </div>
+  <div class="blog-grid" id="blogGrid">
+    <div style="font-family:var(--sans); font-size:14px; color:var(--mist); padding:3rem; text-align:center; grid-column:1/-1;">Loading posts...</div>
   </div>
 
   <section class="final-cta">
@@ -108,6 +97,88 @@
     const toggle = document.getElementById('navToggle');
     const links  = document.getElementById('navLinks');
     toggle.addEventListener('click', () => links.classList.toggle('open'));
+
+    // ── Dynamic blog posts from GitHub ──
+    const REPO   = 'thenoirpencil-netizen/the-noir-pencil';
+    const FOLDER = 'posts';
+    const grid   = document.getElementById('blogGrid');
+
+    function parseFrontMatter(text) {
+      const match = text.match(/^---\n([\s\S]*?)\n---/);
+      if (!match) return {};
+      const yaml = match[1];
+      const data = {};
+      yaml.split('\n').forEach(line => {
+        const colon = line.indexOf(':');
+        if (colon === -1) return;
+        const key = line.slice(0, colon).trim();
+        const val = line.slice(colon + 1).trim().replace(/^["']|["']$/g, '');
+        data[key] = val;
+      });
+      return data;
+    }
+
+    function slugToUrl(filename) {
+      const slug = filename.replace(/\.md$/, '');
+      return `post.html?slug=${slug}`;
+    }
+
+    async function loadPosts() {
+      try {
+        const res  = await fetch(`https://api.github.com/repos/${REPO}/contents/${FOLDER}`);
+        if (!res.ok) throw new Error('Could not reach GitHub');
+        const files = await res.json();
+
+        // Filter to markdown files only, sort newest first
+        const mdFiles = files
+          .filter(f => f.name.endsWith('.md'))
+          .reverse();
+
+        if (mdFiles.length === 0) {
+          grid.innerHTML = '<div style="font-family:var(--sans);font-size:14px;color:var(--mist);padding:3rem;text-align:center;grid-column:1/-1;">No posts yet. Check back soon.</div>';
+          return;
+        }
+
+        // Fetch each file's content to read front matter
+        const posts = await Promise.all(mdFiles.map(async file => {
+          const r    = await fetch(file.download_url);
+          const text = await r.text();
+          const fm   = parseFrontMatter(text);
+          return { ...fm, slug: file.name };
+        }));
+
+        // Sort by date descending
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        grid.innerHTML = posts.map(post => `
+          <div class="blog-card">
+            <div class="blog-card-label">${post.category || 'Journal'}</div>
+            <h2>${post.title || 'Untitled'}</h2>
+            <p>${post.preview || ''}</p>
+            <a href="posts/${slugToUrl(post.slug)}" class="read-more">Read More</a>
+          </div>
+        `).join('');
+
+      } catch (err) {
+        // Fallback to static posts if API fails
+        grid.innerHTML = `
+          <div class="blog-card">
+            <div class="blog-card-label">Editing Basics</div>
+            <h2>The difference between proofreading and editing (and why it matters for your writing)</h2>
+            <p>Most writers use the words interchangeably. Understanding the difference can save you from paying for a service that does not actually solve your problem.</p>
+            <a href="post-1.html" class="read-more">Read More</a>
+          </div>
+          <div class="blog-card">
+            <div class="blog-card-label">Writing Habits</div>
+            <h2>Five things writers do that make their writing harder to read</h2>
+            <p>These are not mistakes, exactly. They are habits. And most writers do not notice them until someone points them out.</p>
+            <a href="post-2.html" class="read-more">Read More</a>
+          </div>
+        `;
+      }
+    }
+
+    loadPosts();
 
     // ── Popup ──
     const overlay  = document.getElementById('popupOverlay');
